@@ -82,7 +82,7 @@
                                     <td>{{ number_format($order->total_amount) }} VND</td>
                                     <td>{{ $order->status }}</td>
                                     <td>
-                                        <a href="" class="btn btn-info btn-sm">Xem</a>
+                                        <a href="{{ route('giohangcuaban', $order->id) }}" class="btn btn-info btn-sm">Xem</a>
                                     </td>
                                 </tr>
                                 @endforeach

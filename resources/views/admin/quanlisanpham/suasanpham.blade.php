@@ -42,7 +42,7 @@
         <input type="number" class="form-control" id="price" name="price" value="{{ $product->price }}" required>
     </div>
      <div class=" mb-3">
-            <input type="text" class="form-control" name="status" value="{{ $product->status }}" placeholder="gioithieu" required />
+            <input type="text" class="form-control" name="INTRODUCE" value="{{$product->INTRODUCE}}" placeholder="gioithieu" required />
         </div>
         <!-- Mô tả sản phẩm -->
         

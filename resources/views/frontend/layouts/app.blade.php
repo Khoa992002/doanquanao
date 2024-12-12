@@ -6,7 +6,7 @@
     <title>@yield('title', 'Home')</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('frontend/frontend/images/icons/favicon.png') }}"/>
+    <link rel="icon" type="image/png" href="{{ asset('frontend/images/icons/KSP2.png') }}"/>
 
     <!-- CSS -->
     <!-- CSRF Token -->
@@ -29,6 +29,14 @@
     <link type="text/css" rel="stylesheet" href="{{ asset('frontend/css/rate.css') }}">
     <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/rate.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+ 
+
+    </style>
+
 </head>
 <body class="animsition">
     <header class="header-v4">
@@ -37,7 +45,10 @@
 	
    <div class="bg0 m-t-23 p-b-140">
    	@yield('content')
+   
    </div>
+   
+
 
     @include('frontend.layouts.footer')
     <div class="btn-back-to-top" id="myBtn">
@@ -46,8 +57,14 @@
 		</span>
 	</div>
 
+
+
+
+
+
 	<!-- Modal1 -->
-	
+	  <!-- Chat Modal -->
+   
      <div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
     <div class="overlay-modal1 js-hide-modal1"></div>
     <div class="container">
@@ -149,6 +166,8 @@
         
 
 	<!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('frontend/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/animsition/js/animsition.min.js') }}"></script>
@@ -236,7 +255,42 @@
                 ps.update();
             });
         });
+
+document.getElementById('chatForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const message = document.getElementById('chatInput').value;
+    const chatBox = document.getElementById('chatBox');
+
+    // Hiển thị tin nhắn của người dùng
+    chatBox.innerHTML += `<div><strong>Bạn:</strong> ${message}</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // Gửi tin nhắn đến server qua AJAX
+    fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({ message })
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Hiển thị phản hồi từ server
+            chatBox.innerHTML += `<div><strong>Bot:</strong> ${data.reply}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        })
+        .catch(error => console.error('Lỗi:', error));
+
+    // Xóa tin nhắn sau khi gửi
+    document.getElementById('chatInput').value = '';
+});
+
+
     </script>
+
+
 	
 
 	

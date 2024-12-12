@@ -75,6 +75,7 @@ public function themgiohang(Request $request)
         // Lưu lại giỏ hàng sau khi cập nhật
         session()->put('cart', $cart);
         $flag = false;
+        // dd($cart);
         break;
     }
 }

@@ -30,7 +30,7 @@
                               
                                 <strong>{{$product->brand}}</strong> <br>
                                 <strong>{{$product->name}}</strong> <br>
-                                <strong>Màu sắc:</strong> <br>
+                                <strong>Số lượng</strong>{{$product->stock}} <br>
                                 
                             </p>
                         </div>

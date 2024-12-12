@@ -23,6 +23,7 @@
 	<!-- Shoping Cart -->
 	<form class="bg0 p-t-75 p-b-85" action="{{ url('thanhtoan') }}" method="POST" enctype="multipart/form-data">
     @csrf <!-- Đảm bảo bảo mật cho form -->
+    <input type="hidden" name="total_amount" value="{{ $sum }}">
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -158,15 +159,20 @@
                             <span class="mtext-110 cl2">${{ number_format($sum??0,0,',','.') }}đ</span>
                         </div>
                     </div>
-
-                    <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                      </form>
+                      <form action="{{ route('momo.qr.payment') }}" method="POST">
+                        <input type="hidden" name="total_amount" value="{{ $sum }}">
+                        @csrf
+                           <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
                         Thanh toán online
                     </button>
+                      </form>
+                   
                 </div>
             </div>
         </div>
     </div>
-    </form>
+  
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">

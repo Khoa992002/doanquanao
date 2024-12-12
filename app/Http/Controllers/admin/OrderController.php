@@ -72,5 +72,12 @@ public function getRevenueByDate()
 
     return response()->json($revenueData);
 }
+public function giohangcuaban(Order $order)
+{
+   $orderItems = $order->items; // Giả sử bạn có quan hệ 'items' với bảng 'order_items'
+
+    return view('frontend.trangcanhan.donhangcanhan', compact('order'));
+}
+
 
 }

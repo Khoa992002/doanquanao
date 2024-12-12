@@ -14,9 +14,10 @@ class NhatKyController extends Controller
      public function blog()
     {
     $categoryblog = CategoryBlog::all();
+    $latestProducts = Product::orderBy('created_at', 'desc')->take(3)->get();
     $blogs = Blog::paginate(2);
 
-    return view('frontend.blog.blog', compact('categoryblog', 'blogs'));
+    return view('frontend.blog.blog', compact('categoryblog', 'blogs','latestProducts'));
     }
     public function ctblog($id)
     {

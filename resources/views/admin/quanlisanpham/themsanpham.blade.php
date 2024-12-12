@@ -48,7 +48,7 @@
                 @endforeach
             </select>
         </div>
-
+        <button href="">Them san phan</button>
         <!-- Hình ảnh sản phẩm -->
         <div class="form-group mb-3">
             <input class="form-control" type="file" multiple name="avatar[]" required>

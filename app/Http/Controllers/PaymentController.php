@@ -64,5 +64,67 @@ class PaymentController extends Controller
     return redirect()->route('giaodienthanhtoan', ['order' => $order->id]);
 
 }
+ public function generateQrPayment(Request $request)
+{
+$data = $request->all();
+
+    // Thông tin cơ bản của thanh toán
+    $partnerCode = 'MOMOBKUN20180529';
+    $accessKey = 'klm05TvNBzhg7h7j';
+    $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
+    $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+
+    $orderInfo = "Thanh toán qua MoMo";
+    $amount = $request->input('total_amount', ); // Lấy số tiền, mặc định 10,000 VND
+    $orderId = time(); // Mã đơn hàng duy nhất
+    $redirectUrl = route('payment.success'); // URL trả về sau khi thanh toán thành công
+    $ipnUrl = route('payment.ipn'); // URL nhận thông báo từ MoMo
+    $extraData = "";
+
+    // Tạo chữ ký (signature)
+    $rawHash = "accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$orderId&requestType=captureWallet";
+    $signature = hash_hmac("sha256", $rawHash, $secretKey);
+
+    // Dữ liệu gửi đến API MoMo
+    $data = [
+        'partnerCode' => $partnerCode,
+        'accessKey' => $accessKey,
+        'requestId' => $orderId,
+        'amount' => $amount,
+        'orderId' => $orderId,
+        'orderInfo' => $orderInfo,
+        'redirectUrl' => $redirectUrl,
+        'ipnUrl' => $ipnUrl,
+        'extraData' => $extraData,
+        'requestType' => 'captureWallet',
+        'signature' => $signature
+    ];
+
+    // Gửi yêu cầu đến MoMo
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $endpoint);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    $response = json_decode($result, true);
+
+    // Kiểm tra phản hồi từ MoMo
+    if (isset($response['payUrl'])) {
+        // Trả về view hiển thị mã QR
+        return view('frontend.thanhtoan.qr', [
+            'payUrl' => $response['payUrl'],
+            'amount' => $amount,
+            'orderId' => $orderId
+        ]);
+    }
+
+    return back()->with('error', 'Không thể tạo thanh toán. Vui lòng thử lại sau.');
+}
+
 
 }

@@ -8,7 +8,7 @@
     <div class="alert alert-success text-center">
         <h3>Gửi đơn hàng thành công!</h3>
         <p>Cảm ơn quý khách đã mua hàng tại <strong>Aobongda.net</strong></p>
-        <p>Chúng tôi sẽ liên hệ với bạn trong vòng 24h. Nếu bạn có bất kỳ thắc mắc hay câu hỏi nào vui lòng gọi điện để được tư vấn: <strong>0989248835</strong></p>
+        <p>Chúng tôi sẽ liên hệ với bạn trong vòng 24h. Nếu bạn có bất kỳ thắc mắc hay câu hỏi nào vui lòng gọi điện để được tư vấn: <strong>0385331914</strong></p>
     </div>
 
     <!-- Thông tin đơn hàng -->

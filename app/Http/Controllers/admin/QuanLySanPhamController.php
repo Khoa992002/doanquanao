@@ -31,6 +31,7 @@ class QuanLySanPhamController extends Controller
     public function addnewsp(Request $request)
     {
         $data = $request->all();
+     
        
         // Validate the incoming request
         $request->validate([
@@ -63,7 +64,7 @@ class QuanLySanPhamController extends Controller
             $product->category_id = $request->input('category_id');
             $product->description = $request->input('description');
             $product->brand_id = $request->input('brand_id');
-            $product->status = $request->input('gioithieu');
+            $product->INTRODUCE = $request->input('gioithieu');
              $product->stock = 0;
             $product->main_image_url = json_encode($data); // Save image names or full paths as needed
 
@@ -243,7 +244,7 @@ public function update(Request $request, $id)
 {
     // Tìm sản phẩm theo ID
     $product = Product::findOrFail($id);
-
+   
     // Validate dữ liệu
     $request->validate([
         'name' => 'required|string|max:255',
@@ -255,7 +256,7 @@ public function update(Request $request, $id)
     // Cập nhật thông tin
     $product->name = $request->input('name');
     $product->price = $request->input('price');
-    $product->status = $request->input('status');
+    $product->INTRODUCE = $request->input('INTRODUCE');
     $product->brand_id = $request->input('brand_id'); // Cập nhật nhãn hàng
 
     // Nếu có hình ảnh mới, lưu hình ảnh và cập nhật URL

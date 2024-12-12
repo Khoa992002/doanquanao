@@ -98,61 +98,43 @@
 							</h4>
 
 							<ul>
+								@foreach($categoryblog as $categoryblog)
 								<li class="bor18">
 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Fashion
+										{{ $categoryblog->name }}
 									</a>
 								</li>
-
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Beauty
-									</a>
-								</li>
-
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Street Style
-									</a>
-								</li>
-
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Life Style
-									</a>
-								</li>
-
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										DIY & Crafts
-									</a>
-								</li>
+                                @endforeach
 							</ul>
 						</div>
 
 						<div class="p-t-65">
 							<h4 class="mtext-112 cl2 p-b-33">
-								Sản phẩm mới nhất 
+								Sản Phẩm Mới Nhất
 							</h4>
 
 							<ul>
-								
+								@foreach($latestProducts as $product)
+								    <?php
+                                       // Giải mã JSON hình ảnh và hiển thị ảnh đầu tiên
+                                            $hinhAnhArray = json_decode($product->main_image_url, true);
+                                       ?>
 								<li class="flex-w flex-t p-b-30">
 									<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-										<img src="images/product-min-01.jpg" alt="PRODUCT">
+										 <img src="{{ asset('upload/admin/product/' . $hinhAnhArray[0] ) }}" style="width: 100%; height: auto; max-height: 300px; object-fit: cover; border-radius: 10px;" alt="IMG-PRODUCT ">
 									</a>
 
 									<div class="size-215 flex-col-t p-t-8">
 										<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-											White Shirt With Pleat Detail Back
+											{{ $product->name }}
 										</a>
 
 										<span class="stext-116 cl6 p-t-20">
-											$19.00
+											  {{ number_format($product->price, 0, ',', '.') }} VND
 										</span>
 									</div>
 								</li>
-                      
+                                @endforeach
 								
 							</ul>
 						</div>

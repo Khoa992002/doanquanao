@@ -24,6 +24,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $total = Order::sum('total_amount');
+        $latestComments = Comment::orderBy('created_at', 'desc')->limit(3)->get();
         return view('admin.dashboard',compact('total'));
     }
     public function giaodienadmin(Request $request)
@@ -133,7 +134,7 @@ $data=$request->all();
      public function promoteUser($id)
     {
         $user = User::findOrFail($id);
-        $user->level = 0; // Cấp quản trị viên
+        $user->level = 1; // Cấp quản trị viên
         $user->save();
 
         return redirect()->route('admin.users')->with('success', 'Người dùng đã được thăng cấp thành quản trị viên.');
@@ -142,7 +143,7 @@ $data=$request->all();
     public function demoteUser($id)
     {
         $user = User::findOrFail($id);
-        $user->level = 1; // Cấp người dùng
+        $user->level = 0; // Cấp người dùng
         $user->save();
 
         return redirect()->route('admin.users')->with('success', 'Quản trị viên đã bị hạ cấp thành người dùng.');

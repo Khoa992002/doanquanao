@@ -36,7 +36,7 @@
 					
 					<!-- Logo desktop -->		
 					<a href="#" class="logo">
-						<img src="{{ asset('frontend/images/icons/k.logo.png') }}" alt="Logo">  
+						<img src="{{ asset('frontend/images/icons/KSP.png') }}" alt="Logo">  
 
 					</a>
 
@@ -44,24 +44,21 @@
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li class="active-menu">
-								<a href="{{url('home')}}">Home</a>
+								<a href="{{url('home')}}">Trang Chủ</a>
 								
 							</li>
 
 							<li>
-								<a href="{{url('shop')}}">Shop</a>
+								<a href="{{url('shop')}}">Cửa Hàng</a>
 							</li>
 
-							<li class="label1" data-label1="hot">
-								<a href="shoping-cart.html">Features</a>
+							
+							<li>
+								<a href="{{url('blog')}}">Tin Tức</a>
 							</li>
 
 							<li>
-								<a href="{{url('blog')}}">Blog</a>
-							</li>
-
-							<li>
-								<a href="about.html">About</a>
+								<a href="{{url('about')}}">About</a>
 							</li>
 							
 
@@ -101,9 +98,7 @@
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
-						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
+						
 					</div>
 				</nav>
 			</div>	

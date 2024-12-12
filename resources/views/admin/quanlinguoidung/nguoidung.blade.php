@@ -52,14 +52,14 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
-                    @if($user->level == 1)
+                    @if($user->level == 0)
                         <span class="badge bg-primary">Người dùng</span>
                     @else
                         <span class="badge bg-success">Quản trị viên</span>
                     @endif
                 </td>
                 <td>
-                    @if($user->level == 1)
+                    @if($user->level == 0)
                         <form action="{{ route('admin.promoteUser', $user->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('PATCH')

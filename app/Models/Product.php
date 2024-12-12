@@ -26,6 +26,7 @@ class Product extends Model
         'main_image_url',
         'size_id',
         'category_id',
+        'category_id',
            // URL hình ảnh đại diện chính
     ];
      public function sizes()

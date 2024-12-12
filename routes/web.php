@@ -14,6 +14,7 @@ use App\Http\Controllers\frontend\LoginController;
 use App\Http\Controllers\frontend\ProductController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\NhatKyController;
+use App\Http\Controllers\ChatController;
 //
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::get('/', function () {
 Route::get('home',[HomeController::class, 'index']);
 
 Route::get('shop',[HomeController::class, 'shop']);
+Route::get('about',[HomeController::class, 'about']);
 
 Route::get('dangnhap',[LoginController::class, 'dangnhap']);
 Route::get('dangxuat',[LoginController::class, 'dangxuat']);
@@ -43,8 +45,19 @@ Route::post('dangky',[LoginController::class, 'dangky']);
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::get('home/chitietsanpham/{id}', [ProductController::class, 'thongtinsanpham'])->name('chitietsanpham');
 Route::get('products/{productId}/sizes/{sizeId}/stock', [ProductController::class, 'getStockBySize']);
+//thanh toán momo
+Route::post('/momo/qr-payment', [PaymentController::class, 'generateQrPayment'])->name('momo.qr.payment');
+Route::get('/payment-success', function () {
+    return view('frontend.thanhtoan.thanhtoanmomo');
+})->name('payment.success');
 
+Route::post('/payment-ipn', function (Request $request) {
+    // Xử lý thông báo từ MoMo (IPN - Instant Payment Notification)
+    // Log dữ liệu để kiểm tra
+    \Log::info('IPN data received:', $request->all());
 
+    return response()->json(['message' => 'IPN received']);
+})->name('payment.ipn');
 
 
 
@@ -71,6 +84,7 @@ Route::get('timkiem', [ProductController::class, 'search']);
 Route::get('/products/sort/price', [ProductController::class, 'sortByPrice'])->name('products.sort.price');
 
 
+
 //view phần blog
 
 Route::get('blog', [NhatKyController::class, 'blog']);
@@ -79,6 +93,7 @@ Route::get('blog-detail/{id}', [NhatKyController::class, 'ctblog']);
 
 Route::get('thongtincanhan', [UserController::class, 'thongtincanhan']);
 Route::post('suathongtincanhan', [UserController::class, 'update'])->name('suathongtincanhan');
+Route::get('giohangcuaban/{order}', [OrderController::class, 'giohangcuaban'])->name('giohangcuaban');
 
 
 
@@ -141,7 +156,7 @@ Route::patch('/admin/users/{id}/promote', [UserController::class, 'promoteUser']
 Route::patch('/admin/users/{id}/demote', [UserController::class, 'demoteUser'])->name('admin.demoteUser');
 Route::delete('/admin/users/{id}', [UserController::class, 'deleteUser'])->name('admin.deleteUser');
 
-
+Route::post('/chat', [ChatController::class, 'handleChat']);
 
 
 Auth::routes();

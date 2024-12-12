@@ -71,7 +71,7 @@
 					</h4>
 
 					<p class="stext-107 cl7 size-201">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+						Mọi thắc mắc xin liên hệ về số hotline của chúng tôi : 0385331914
 					</p>
 
 					<div class="p-t-27">

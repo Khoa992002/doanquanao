@@ -28,4 +28,9 @@ class HomeController extends Controller
         $category = Category::all(); 
         return view('frontend.shop.shop',compact('data','category'));
      }
+     public function about()
+     {
+        
+        return view('frontend.about.about');
+     }
 }
